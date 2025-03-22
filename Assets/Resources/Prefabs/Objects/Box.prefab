@@ -42,8 +42,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5965058329930390942}
   - component: {fileID: 118573722349596958}
-  m_Layer: 10
-  m_Name: Interactable
+  m_Layer: 11
+  m_Name: Pickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

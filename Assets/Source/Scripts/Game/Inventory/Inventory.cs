@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Source.Scripts.Game.Inventory.Items;
+using Source.Scripts.Game.Items;
 using Source.Scripts.Infrastructure.Services;
 using Source.Scripts.Infrastructure.Services.SignalService;
 using Source.Scripts.Services.Input;
@@ -30,7 +30,11 @@ namespace Source.Scripts.Game.Inventory
             _slots = new InventorySlot[slotCount];
             for (var i = 0; i < slotCount; i++)
                 _slots[i] = new InventorySlot();
-            
+        }
+
+        private void Start()
+        {
+            _signalRegister.RegistryRaise(new Signals.OnInventoryInit(this));
         }
 
         private void Update() => 

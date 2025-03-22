@@ -1,4 +1,4 @@
-using Source.Scripts.Game.Inventory.Items;
+using Source.Scripts.Game.Items;
 using UnityEngine;
 using UnityEngine.UI;
 

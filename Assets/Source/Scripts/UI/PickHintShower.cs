@@ -1,14 +1,13 @@
-﻿using Source.Scripts.Game.Inventory.Items;
-using Source.Scripts.Infrastructure.Services;
+﻿using Source.Scripts.Infrastructure.Services;
 using Source.Scripts.Infrastructure.Services.SignalService;
 using TMPro;
 using UnityEngine;
 
 namespace Source.Scripts.UI
 {
-    public class PickupHintShower : MonoBehaviour
+    public class PickHintShower : MonoBehaviour
     {
-        [SerializeField] private TMP_Text pickupHintText;
+        [SerializeField] private TMP_Text pickHintText;
         private ISignalSubscriber _subscriber;
 
         private void Awake()
@@ -22,11 +21,11 @@ namespace Source.Scripts.UI
         
         private void ChangePickupHintStatus(Signals.OnPickupHintStatusChanged data)
         {
-            pickupHintText.text = data.IsShown ? $"Нажмите [E] чтобы подобрать {data.Item.ItemName}" : "";
-            pickupHintText.enabled = data.IsShown;
+            pickHintText.text = data.IsShown ? $"Нажмите [E] чтобы подобрать {data.Item.ItemName}" : "";
+            pickHintText.enabled = data.IsShown;
         }
         
-        private void OnDisable()
+        private void OnDestroy()
         {
             _subscriber.Unsubscribe<Signals.OnPickupHintStatusChanged>(ChangePickupHintStatus);
         }

@@ -1,5 +1,5 @@
 ﻿using DG.Tweening;
-using Source.Scripts.Game.Inventory.Items;
+using Source.Scripts.Game.Items;
 using UnityEngine;
 
 namespace Source.Scripts.Game.Inventory

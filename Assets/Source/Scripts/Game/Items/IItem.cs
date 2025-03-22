@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using Image = UnityEngine.UI.Image;
 
-namespace Source.Scripts.Game.Inventory.Items
+namespace Source.Scripts.Game.Items
 {
     public interface IItem
     {

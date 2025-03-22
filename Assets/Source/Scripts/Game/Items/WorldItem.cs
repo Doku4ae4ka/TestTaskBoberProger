@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Source.Scripts.Game.Inventory.Items
+namespace Source.Scripts.Game.Items
 {
-    public class WorldItem : MonoBehaviour
+    //Сделать норм наследование
+    public class WorldItem : MonoBehaviour, ICarried
     {
         [SerializeField] private Rigidbody rb;
         [SerializeField] private ItemBase itemData;

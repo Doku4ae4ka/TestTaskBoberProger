@@ -1,5 +1,5 @@
 ﻿using System;
-using Source.Scripts.Game.Inventory.Items;
+using Source.Scripts.Game.Items;
 
 namespace Source.Scripts.Game.Inventory
 {

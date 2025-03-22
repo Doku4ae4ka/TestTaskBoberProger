@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1900232112141290438}
   - component: {fileID: 4630690421622571551}
-  m_Layer: 10
-  m_Name: Interactable
+  m_Layer: 11
+  m_Name: Pickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

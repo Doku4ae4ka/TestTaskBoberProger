@@ -1,4 +1,5 @@
-﻿using Source.Scripts.Game.Inventory.Items;
+﻿using Source.Scripts.Game.Items;
+using Source.Scripts.Game.Objects;
 using Source.Scripts.Infrastructure.Services;
 using Source.Scripts.Infrastructure.Services.SignalService;
 using Source.Scripts.Services.Input;
@@ -36,6 +37,7 @@ namespace Source.Scripts.Game.Inventory
         private void Update()
         {
             HandlePickup();
+            HandleDoorInteraction();
 
             HandleThrow();
             HandleDrop();
@@ -47,9 +49,9 @@ namespace Source.Scripts.Game.Inventory
             var ray = _camera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
             if (Physics.Raycast(ray, out var hit, pickupRange, LayerMask.GetMask(Pickupable)))
             {
-                if(!hit.collider.transform.root.TryGetComponent<WorldItem>(out var worldItem)) return;
+                if(!hit.collider.transform.parent.TryGetComponent<WorldItem>(out var worldItem)) return;
                 _signalRegister.RegistryRaise(
-                    new Signals.OnPickupHintStatusChanged(true, worldItem.GetItem()));
+                        new Signals.OnPickupHintStatusChanged(true, worldItem.GetItem()));
                 
                 if (!_inputService.IsInteractButtonUp()) return;
 
@@ -57,6 +59,26 @@ namespace Source.Scripts.Game.Inventory
             }
             else _signalRegister.RegistryRaise(
                 new Signals.OnPickupHintStatusChanged(false));
+        }
+        
+        private void HandleDoorInteraction()
+        {
+            //Оптимизации НОЛЬ
+            var ray = _camera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+            if (Physics.Raycast(ray, out var hit, pickupRange, LayerMask.GetMask(Interaction)))
+            {
+                if(!hit.collider.TryGetComponent<DoorLocker>(out var door)) return;
+                
+                if (inventory.TryGetWorldItem(inventory.SelectedSlotIndex, out var worldItem))
+                    _signalRegister.RegistryRaise(
+                        new Signals.OnDoorHintStatusChanged(true, door, worldItem.GetItem()));
+                
+                if (!_inputService.IsInteractButtonUp()) return;
+                
+                door.OnInteract();
+            }
+            else _signalRegister.RegistryRaise(
+                new Signals.OnDoorHintStatusChanged(false));
         }
 
         private void HandleThrow()

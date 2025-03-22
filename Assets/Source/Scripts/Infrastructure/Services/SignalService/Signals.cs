@@ -1,4 +1,6 @@
-﻿using Source.Scripts.Game.Inventory.Items;
+﻿using Source.Scripts.Game.Inventory;
+using Source.Scripts.Game.Items;
+using Source.Scripts.Game.Objects;
 
 namespace Source.Scripts.Infrastructure.Services.SignalService
 {
@@ -52,6 +54,33 @@ namespace Source.Scripts.Infrastructure.Services.SignalService
             }
         }
         
+        public struct OnDoorHintStatusChanged
+        {
+            public bool IsHintShown;
+            public DoorLocker Locker;
+            public IItem Item;
+
+            public OnDoorHintStatusChanged(bool isHintShown, DoorLocker locker = null, IItem item = null)
+            {
+                IsHintShown = isHintShown;
+                Locker = locker;
+                Item = item;
+            }
+        }
+
+        
         #endregion
+        
+        public struct OnInventoryInit
+        {
+            public Inventory Inventory;
+
+            public OnInventoryInit(Inventory inventory)
+            {
+                Inventory = inventory;
+            }
+        }
+        
+        public struct OnDoorOpened { }
     }
 }

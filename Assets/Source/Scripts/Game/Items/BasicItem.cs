@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Source.Scripts.Game.Inventory.Items
+namespace Source.Scripts.Game.Items
 {
     [CreateAssetMenu(menuName = "Items/Basic Item", fileName = "NewBasicItem")]
     public class BasicItem : ItemBase
