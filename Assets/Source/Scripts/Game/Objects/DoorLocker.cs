@@ -63,7 +63,7 @@ namespace Source.Scripts.Game.Objects
                 else 
                     outline.OutlineColor = Color.green;
             }
-            if (data.IsShown && data.Item == null)
+            if (data.IsShown && data.Item == null && data.Locker.DoorLocked)
                 outline.OutlineColor = Color.red;
             outline.enabled = data.IsShown;
         }

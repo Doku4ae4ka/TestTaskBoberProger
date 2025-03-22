@@ -36,7 +36,7 @@ namespace Source.Scripts.UI
                 else
                     interactionHintText.text = "Нажмите [E] чтобы открыть дверь";
             }
-            if (data.IsShown && data.Item == null)
+            if (data.IsShown && data.Item == null && data.Locker.DoorLocked)
                 interactionHintText.text = $"Мне нужно найти {data.Locker.GetItem().ItemName}, чтобы открыть дверь";
             interactionHintText.enabled = data.IsShown;
         }
