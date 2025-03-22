@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1906033537966927488}
   - component: {fileID: 5496911672975427533}
   - component: {fileID: 6927238268732697995}
+  - component: {fileID: 5584997116028520931}
   m_Layer: 10
   m_Name: Door
   m_TagString: Untagged
@@ -71,6 +72,25 @@ MonoBehaviour:
   doorLocked: 1
   keyId: 1
   keyData: {fileID: 11400000, guid: fe50773993fb40c4fa88065a5e7d8c28, type: 2}
+  outline: {fileID: 5584997116028520931}
+--- !u!114 &5584997116028520931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240498605076991547}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.40950215, b: 0.015686274, a: 1}
+  outlineWidth: 6
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2280484233405655404
 GameObject:
   m_ObjectHideFlags: 0

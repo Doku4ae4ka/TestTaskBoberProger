@@ -11,6 +11,7 @@ namespace Source.Scripts.Game.Objects
         [SerializeField] private bool doorLocked;
         [SerializeField] private int keyId;
         [SerializeField] private ItemBase keyData;
+        [SerializeField] private Outline outline;
         private Inventory.Inventory _characterInventory;
         private ISignalRegister _signalRegister;
         private ISignalSubscriber _signalSubscriber;
@@ -27,6 +28,7 @@ namespace Source.Scripts.Game.Objects
         private void Start()
         {
             _signalSubscriber.Subscribe<Signals.OnInventoryInit>(SetCharacterInventory);
+            _signalSubscriber.Subscribe<Signals.OnDoorHintStatusChanged>(ChangeOutlineStatus);
         }
 
         public IItem GetItem() => keyData;
@@ -42,15 +44,34 @@ namespace Source.Scripts.Game.Objects
                         doorLocked = false;
                 }   
             }
-            else _signalRegister.RegistryRaise(new Signals.OnDoorOpened());
+            else
+                _signalRegister.RegistryRaise(new Signals.OnDoorOpened());
         }
 
         private void SetCharacterInventory(Signals.OnInventoryInit data) =>
             _characterInventory = data.Inventory;
         
+        private void ChangeOutlineStatus(Signals.OnDoorHintStatusChanged data)
+        {
+            if (data.IsShown && data.Item != null)
+            {
+                var keyItem = data.Item as KeyItem;
+                if (keyItem && keyItem.keyId == data.Locker.KeyId && doorLocked)
+                    outline.OutlineColor = Color.green;
+                else if (!(keyItem && keyItem.keyId == data.Locker.KeyId) && doorLocked)
+                    outline.OutlineColor = Color.red;
+                else 
+                    outline.OutlineColor = Color.green;
+            }
+            if (data.IsShown && data.Item == null)
+                outline.OutlineColor = Color.red;
+            outline.enabled = data.IsShown;
+        }
+        
         private void OnDisable()
         {
             _signalSubscriber.Unsubscribe<Signals.OnInventoryInit>(SetCharacterInventory);
+            _signalSubscriber.Unsubscribe<Signals.OnDoorHintStatusChanged>(ChangeOutlineStatus);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Source.Scripts.UI
         
         private void ChangeDoorHintStatus(Signals.OnDoorHintStatusChanged data)
         {
-            if (data.IsHintShown)
+            if (data.IsShown && data.Item != null)
             {
                 var hasKey = false;
                 var keyItem = data.Item as KeyItem;
@@ -36,7 +36,9 @@ namespace Source.Scripts.UI
                 else
                     interactionHintText.text = "Нажмите [E] чтобы открыть дверь";
             }
-            interactionHintText.enabled = data.IsHintShown;
+            if (data.IsShown && data.Item == null)
+                interactionHintText.text = $"Мне нужно найти {data.Locker.GetItem().ItemName}, чтобы открыть дверь";
+            interactionHintText.enabled = data.IsShown;
         }
         
         private void OnDestroy()

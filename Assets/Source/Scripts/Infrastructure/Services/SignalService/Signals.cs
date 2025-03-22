@@ -56,13 +56,13 @@ namespace Source.Scripts.Infrastructure.Services.SignalService
         
         public struct OnDoorHintStatusChanged
         {
-            public bool IsHintShown;
+            public bool IsShown;
             public DoorLocker Locker;
             public IItem Item;
 
-            public OnDoorHintStatusChanged(bool isHintShown, DoorLocker locker = null, IItem item = null)
+            public OnDoorHintStatusChanged(bool isShown, DoorLocker locker = null, IItem item = null)
             {
-                IsHintShown = isHintShown;
+                IsShown = isShown;
                 Locker = locker;
                 Item = item;
             }

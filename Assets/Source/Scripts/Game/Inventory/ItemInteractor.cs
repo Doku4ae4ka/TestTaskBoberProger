@@ -54,7 +54,6 @@ namespace Source.Scripts.Game.Inventory
                         new Signals.OnPickupHintStatusChanged(true, worldItem.GetItem()));
                 
                 if (!_inputService.IsInteractButtonUp()) return;
-
                 inventory.TryAddItem(worldItem);
             }
             else _signalRegister.RegistryRaise(
@@ -69,12 +68,11 @@ namespace Source.Scripts.Game.Inventory
             {
                 if(!hit.collider.TryGetComponent<DoorLocker>(out var door)) return;
                 
-                if (inventory.TryGetWorldItem(inventory.SelectedSlotIndex, out var worldItem))
-                    _signalRegister.RegistryRaise(
-                        new Signals.OnDoorHintStatusChanged(true, door, worldItem.GetItem()));
+                var result = inventory.TryGetWorldItem(inventory.SelectedSlotIndex, out var worldItem);
+                _signalRegister.RegistryRaise(
+                        new Signals.OnDoorHintStatusChanged(true, door, result ? worldItem.GetItem() : null));
                 
                 if (!_inputService.IsInteractButtonUp()) return;
-                
                 door.OnInteract();
             }
             else _signalRegister.RegistryRaise(
